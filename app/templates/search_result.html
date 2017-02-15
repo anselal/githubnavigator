@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block content %}
+
+	<div class="container">
+		<div class="row mt centered mt-top">
+			<div class="col-lg-7 col-lg-offset-2">
+				<h1>Search Keyword Provided Is: {{theKey}}</h1>
+				<h3>
+          There are {{total}} result(s) fetched from Github out of which<br />{{latest}} displayed below.
+        </h3>
+        <h4>The results are displayed in descending order based on Created Date</h4>
+			</div>
+		</div><!-- /row -->
+
+		<div class="row mt centered">
+      {% for theData in theDatas %}
+			<div class="col-lg-12">
+				<h3>{{loop.index}}: Repository Name: <a href="{{theData.repository_url}}" target="_blank">{{theData.respository_name}}</a></h3>
+				<table class="table table-custom-hover">
+					<thead>
+						<tr>
+							<th colspan="2">General Details</th>
+						</tr>
+					 </thead>
+					 <tbody>
+             <tr>
+               <td>Description</td>
+               <td>{{theData.repository_description}}</td>
+             </tr>
+  					 <tr>
+  					   <td>Created Date</td>
+  						 <td>{{theData.created_at}}</td>
+  						</tr>
+						<tr>
+							<td>Author Avatar</td>
+							<td>
+								<a href="{{theData.owner_url}}" target="_blank">
+									<img src="{{theData.avatar_url}}" alt="avatar" height="42" width="42"/>
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td>Author GitHub Name</td>
+							<td>{{theData.owner_login}}</td>
+						</tr>
+					 </tbody>
+					 <thead>
+						<tr>
+							<th colspan="2">Last Commit</th>
+						</tr>
+					 </thead>
+					 <tbody>
+						<tr>
+							<td>Sha</td>
+							<td>{{theData.sha}}</td>
+						</tr>
+						<tr>
+							<td>Commit Author</td>
+							<td>{{theData.commit_author_name}}</td>
+						</tr>
+						<tr>
+							<td colspan="2" class="centered">Commit Message</td>
+						</tr>
+						<tr>
+							<td colspan="2" class="font-normal">{{theData.commit_message}}</td>
+						</tr>
+					 </tbody>
+				</table>
+			</div><!--/col-lg-12 -->
+
+			<div class="clearfix"></div>
+			<hr />
+      {% endfor %}
+
+		</div><!-- /row -->
+	</div><!-- /container -->
+
+	<div class="clearfix"></div>
+
+{% endblock %}
